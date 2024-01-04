@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="tirminil.png" type="image/png">
+  <meta charset="UTF-8">
+  <title>Terminal</title>
+  <style>
+    body {
+      font-family: monospace;
+      background-color: black;
+      color: white;
+      padding: 20px;
+    }
+    .terminal {
+      border: 1px solid red;
+      border-radius: 5px;
+      padding: 10px;
+      width: 80%;
+      margin: 0 auto;
+      min-height: 200px;
+      overflow-y: auto;
+    }
+    .input-line {
+      display: flex;
+    }
+    .input-line:before {
+      content: "$ ";
+      margin-right: 5px;
+    }
+    .input-field {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: red;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal" id="terminal">
+    <div>Welcome to tirminil!</div>
+    <div class="input-line">
+      <span class="current-dir">~</span>
+      <input type="text" class="input-field" id="userInput" autofocus>
+    </div>
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const userInput = document.getElementById('userInput');
+
+    userInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const inputText = userInput.value.trim();
+        const output = document.createElement('div');
+        output.textContent = inputText;
+
+        terminal.insertBefore(output, userInput.parentNode);
+        userInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
